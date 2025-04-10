@@ -1,0 +1,45 @@
+{
+  "name": "MultiMind AI Chat Development",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "none"
+    }
+  },
+
+  "forwardPorts": [
+    3000, // Next.js
+    5000, // Backend API server
+    8081, // Expo Metro Bundler Web UI
+    19000, // Expo Metro Bundler
+    19001, // Expo
+    19002 // Expo Webpack
+  ],
+
+  "postCreateCommand": "npm install -g expo-cli && cd backend && npm install && cd ../frontend && npm install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "bycedric.vscode-expo"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  },
+
+  "remoteEnv": {
+    "EXPO_PUBLIC_API_URL": "https://${localEnv:CODESPACE_NAME}-5000.${localEnv:GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+  }
+}
